@@ -2,23 +2,26 @@ protocol GoalListInteractorProtocol: AnyObject {
     func fetchGoals()
 }
 
-class GoalListInteractor {
-    weak var presenter: GoalListPresenter?
+class GoalListInteractor: GoalListInteractorProtocol  {
     
-    private let apiService = MockUserGoalAPIService()
+    var presenter: GoalListPresenterProtocol?
+    
+    private let apiService: MockUserGoalAPIService
+    
+    init(apiService: MockUserGoalAPIService = MockUserGoalAPIService()) {
+        
+        self.apiService = apiService
+        
+    }
+    
+    func fetchGoals() {
+        print("🔄 Interactor запрашивает цели")
+        apiService.loadGoals { [weak self] goals in
+            print("✅ Interactor получил goals: \(goals.map { $0.title })")
+            
+            self?.presenter?.presentGoals(goals)
+        }
+    }
     
 }
 
-extension GoalListInteractor: GoalListInteractorProtocol {
-    
-    func fetchGoals() {
-        apiService.loadGoals { [weak self] result in
-            switch result {
-            case .success(let goals):
-                self?.presenter?.presentGoals(goals)
-            case .failure(_):
-                print("error")
-            }
-        }
-    }
-}

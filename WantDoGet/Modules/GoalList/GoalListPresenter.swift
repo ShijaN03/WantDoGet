@@ -1,20 +1,22 @@
 protocol GoalListPresenterProtocol: AnyObject {
-    func viewDidLoaded()
+    func presentGoals(_ goals: [Goal])
 }
 
 class GoalListPresenter {
+    
     weak var view: GoalListViewProtocol?
     
-    func presentGoals( _ goals: [Goal]) {
-        let viewModels = goals.map {
-            Goal(id: $0.id, title: $0.title, isCompleted: $0.isCompleted)
-        }
-        view?.displayGoals(viewModels)
+    init(view: GoalListViewProtocol?) {
+        self.view = view
     }
+    
 }
 
 extension GoalListPresenter: GoalListPresenterProtocol {
-    func viewDidLoaded() {
-        // start loading info
+    
+    func presentGoals(_ goals: [Goal]) {
+        print("📤 Presenter получил goals: \(goals.map { $0.title })")
+        view?.displayGoals(goals)
     }
+    
 }

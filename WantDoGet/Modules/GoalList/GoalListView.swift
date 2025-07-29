@@ -1,17 +1,17 @@
 import UIKit
 
 protocol GoalListViewProtocol: AnyObject {
-    func displayGoals(_ viewModels: [Goal])
+    func displayGoals(_ goals: [Goal])
 }
 
-class GoalListView: UIViewController {
+class GoalListView: UIViewController, GoalListViewProtocol {
     
     var interactor: GoalListInteractorProtocol?
     var router: GoalListRouterProtocol?
     
-    let tableView = UITableView()
-    
     private var goals: [Goal] = []
+    
+    let tableView = UITableView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,20 +21,15 @@ class GoalListView: UIViewController {
         
     }
     
-    func displayGoals(_ viewModels: [Goal]) {
-        self.goals = viewModels
-        tableView.reloadData()
-    }
-    
     private func setUpTableView() {
         view.addSubview(tableView)
         
         tableView.delegate = self
         tableView.dataSource = self
         
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.register(GoalListCell.self, forCellReuseIdentifier: "GoalCell")
         
-        view.translatesAutoresizingMaskIntoConstraints = false 
+        tableView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.topAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -45,23 +40,27 @@ class GoalListView: UIViewController {
     
 }
 
-extension GoalListView: GoalListViewProtocol {
+extension GoalListView {
     
+    func displayGoals(_ goals: [Goal]) {
+        print("📥 View получил goals: \(goals.map { $0.title })")
+        self.goals = goals
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+    }
 }
 
 extension GoalListView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        goals.count
+        return goals.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let goal = goals[indexPath.row]
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        
-        cell.textLabel?.text = goal.title
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: GoalListCell.identifier, for: indexPath) as? GoalListCell else { return UITableViewCell() }
+        cell.configure(with: goals[indexPath.row])
         
         return cell
- 
     }
     
     

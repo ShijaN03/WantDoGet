@@ -2,11 +2,8 @@ protocol GoalListRouterProtocol: AnyObject {
     
 }
 
-class GoalListRouter {
-    weak var view: GoalListViewProtocol?
+class GoalListRouter: GoalListRouterProtocol {
     
-}
-
-extension GoalListRouter: GoalListRouterProtocol {
+    weak var view: GoalListViewProtocol?
     
 }
