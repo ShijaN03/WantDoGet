@@ -1,6 +1,7 @@
 import UIKit
 
 class GoalListBuilder {
+    
     static func build() -> UIViewController {
         
         let apiService = MockUserGoalAPIService()
@@ -10,6 +11,7 @@ class GoalListBuilder {
         let router = GoalListRouter()
         
         interactor.presenter = presenter
+        
         view.interactor = interactor
         view.router = router
         

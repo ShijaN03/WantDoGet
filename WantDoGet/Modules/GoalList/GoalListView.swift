@@ -4,7 +4,7 @@ protocol GoalListViewProtocol: AnyObject {
     func displayGoals(_ goals: [Goal])
 }
 
-class GoalListView: UIViewController, GoalListViewProtocol {
+class GoalListView: UIViewController {
     
     var interactor: GoalListInteractorProtocol?
     var router: GoalListRouterProtocol?
@@ -40,7 +40,7 @@ class GoalListView: UIViewController, GoalListViewProtocol {
     
 }
 
-extension GoalListView {
+extension GoalListView: GoalListViewProtocol {
     
     func displayGoals(_ goals: [Goal]) {
         print("📥 View получил goals: \(goals.map { $0.title })")
