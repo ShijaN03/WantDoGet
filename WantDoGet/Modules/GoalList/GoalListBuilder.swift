@@ -6,16 +6,20 @@ class GoalListBuilder {
         
         let apiService = MockUserGoalAPIService()
         let view = GoalListView()
+        let presenter = GoalListPresenter()
         let interactor = GoalListInteractor(apiService: apiService)
-        let presenter = GoalListPresenter(view: view)
         let router = GoalListRouter()
+        
+        view.presenter = presenter
+        
+        presenter.view = view
+        presenter.interactor = interactor
+        presenter.router = router
         
         interactor.presenter = presenter
         
-        view.interactor = interactor
-        view.router = router
-        
         router.view = view
+        
         
         return view
     }

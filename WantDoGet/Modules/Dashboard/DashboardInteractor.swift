@@ -1,9 +1,6 @@
-protocol DashboardInteractorProtocol: AnyObject {
-    
-}
 
-class DashboardInteractor: DashboardInteractorProtocol {
+class DashboardInteractor: DashboardInteractorInput {
     
-    var presenter: DashboardPresenterProtocol?
+    weak var presenter: DashboardInteractorOutput?
     
 }

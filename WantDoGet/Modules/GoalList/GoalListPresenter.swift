@@ -1,22 +1,42 @@
-protocol GoalListPresenterProtocol: AnyObject {
-    func presentGoals(_ goals: [Goal])
-}
+import Foundation
 
 class GoalListPresenter {
     
     weak var view: GoalListViewProtocol?
+    var interactor: GoalListInteractorInput?
+    var router: GoalListRouterProtocol?
     
-    init(view: GoalListViewProtocol?) {
-        self.view = view
-    }
+    private var goals: [Goal] = []
     
 }
 
-extension GoalListPresenter: GoalListPresenterProtocol {
+extension GoalListPresenter: GoalListPresenterInput {
     
-    func presentGoals(_ goals: [Goal]) {
-        print("📤 Presenter получил goals: \(goals.map { $0.title })")
-        view?.displayGoals(goals)
+    func viewDidLoad() {
+        interactor?.fetchGoals()
+    }
+    
+    func goal(with index: Int) -> Goal {
+        return goals[index]
+    }
+    
+    func numberOfGoals() -> Int {
+        return goals.count
+    }
+    
+    
+    
+    
+    
+}
+
+extension GoalListPresenter: GoalListInteractorOutput {
+    
+    func didFetchGoals(_ goals: [Goal]) {
+        self.goals = goals
+        DispatchQueue.main.async {
+            self.view?.reloadData()
+        }
     }
     
 }

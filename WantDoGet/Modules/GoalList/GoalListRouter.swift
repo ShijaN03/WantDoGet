@@ -1,6 +1,3 @@
-protocol GoalListRouterProtocol: AnyObject {
-    
-}
 
 class GoalListRouter: GoalListRouterProtocol {
     

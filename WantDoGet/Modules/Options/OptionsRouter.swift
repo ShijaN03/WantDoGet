@@ -1,6 +1,3 @@
-protocol OptionsRouterProtocol: AnyObject {
-    
-}
 
 class OptionsRouter: OptionsRouterProtocol {
     

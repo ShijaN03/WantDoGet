@@ -1,6 +1,3 @@
-protocol DashboardRouterProtocol: AnyObject {
-    
-}
 
 class DashboardRouter: DashboardRouterProtocol {
     

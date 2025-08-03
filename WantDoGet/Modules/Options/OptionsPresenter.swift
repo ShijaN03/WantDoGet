@@ -1,16 +1,18 @@
-protocol OptionsPresenterProtocol: AnyObject {
-    
-}
 
 class OptionsPresenter {
     
     weak var view: OptionsViewProtocol?
+    var interactor: OptionsInteractorInput?
+    var router: OptionsRouterProtocol?
     
-    init(view: OptionsViewProtocol?) {
-        self.view = view
+}
+
+extension OptionsPresenter: OptionsPresenterInput {
+    func viewDidLoad() {
+        
     }
 }
 
-extension OptionsPresenter: OptionsPresenterProtocol {
+extension OptionsPresenter: OptionsInteractorOutput {
     
 }

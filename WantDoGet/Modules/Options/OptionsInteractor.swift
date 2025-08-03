@@ -1,9 +1,6 @@
-protocol OptionsInteractorProtocol: AnyObject {
-    
-}
 
-class OptionsInteractor: OptionsInteractorProtocol {
+class OptionsInteractor: OptionsInteractorInput {
     
-    var presenter: OptionsPresenterProtocol?
+    weak var presenter: OptionsInteractorOutput?
     
 }

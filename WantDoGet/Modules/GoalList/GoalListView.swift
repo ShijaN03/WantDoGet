@@ -1,15 +1,8 @@
 import UIKit
 
-protocol GoalListViewProtocol: AnyObject {
-    func displayGoals(_ goals: [Goal])
-}
-
 class GoalListView: UIViewController {
     
-    var interactor: GoalListInteractorProtocol?
-    var router: GoalListRouterProtocol?
-    
-    private var goals: [Goal] = []
+    var presenter: GoalListPresenterInput?
     
     let tableView = UITableView()
     
@@ -17,8 +10,8 @@ class GoalListView: UIViewController {
         super.viewDidLoad()
         setUpTableView()
         view.backgroundColor = .lightGray
-        interactor?.fetchGoals()
-        
+
+        presenter?.viewDidLoad()
     }
     
     private func setUpTableView() {
@@ -27,7 +20,7 @@ class GoalListView: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         
-        tableView.register(GoalListCell.self, forCellReuseIdentifier: "GoalCell")
+        tableView.register(GoalListCell.self, forCellReuseIdentifier: GoalListCell.identifier)
         
         tableView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -42,23 +35,23 @@ class GoalListView: UIViewController {
 
 extension GoalListView: GoalListViewProtocol {
     
-    func displayGoals(_ goals: [Goal]) {
-        print("📥 View получил goals: \(goals.map { $0.title })")
-        self.goals = goals
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
-        }
+    func reloadData() {
+        tableView.reloadData()
     }
 }
 
 extension GoalListView: UITableViewDelegate, UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return goals.count
+        return presenter?.numberOfGoals() ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         guard let cell = tableView.dequeueReusableCell(withIdentifier: GoalListCell.identifier, for: indexPath) as? GoalListCell else { return UITableViewCell() }
-        cell.configure(with: goals[indexPath.row])
+        guard let goal = presenter?.goal(with: indexPath.row) else { return  UITableViewCell() }
+        
+        cell.configure(with: goal)
         
         return cell
     }

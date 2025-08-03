@@ -1,17 +1,20 @@
-protocol DashboardPresenterProtocol: AnyObject {
-    
-}
 
 class DashboardPresenter {
     
     weak var view: DashboardViewProtocol?
+    var interactor: DashboardInteractorInput?
+    var router: DashboardRouterProtocol?
     
-    init(view: DashboardViewProtocol?) {
-        self.view = view
+}
+
+extension DashboardPresenter: DashboardPresenterInput {
+    
+    func viewDidLoad() {
+        
     }
 }
 
-extension DashboardPresenter: DashboardPresenterProtocol {
+extension DashboardPresenter: DashboardInteractorOutput {
     
 }
 
