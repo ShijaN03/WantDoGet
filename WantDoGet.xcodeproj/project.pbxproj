@@ -6,6 +6,11 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		4C8ABC742E40DFED0096F599 /* GoalEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C8ABC732E40DFED0096F599 /* GoalEntity+CoreDataProperties.swift */; };
+		4C8ABC752E40DFED0096F599 /* GoalEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C8ABC722E40DFED0096F599 /* GoalEntity+CoreDataClass.swift */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		4CB418FD2E3778FA00277FB0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -24,6 +29,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4C8ABC722E40DFED0096F599 /* GoalEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "GoalEntity+CoreDataClass.swift"; path = "WantDoGet/CoreData/GoalEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		4C8ABC732E40DFED0096F599 /* GoalEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "GoalEntity+CoreDataProperties.swift"; path = "WantDoGet/CoreData/GoalEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		4CB418E62E3778F900277FB0 /* WantDoGet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WantDoGet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CB418FC2E3778FA00277FB0 /* WantDoGetTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WantDoGetTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CB419062E3778FA00277FB0 /* WantDoGetUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WantDoGetUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -88,6 +95,8 @@
 		4CB418DD2E3778F900277FB0 = {
 			isa = PBXGroup;
 			children = (
+				4C8ABC722E40DFED0096F599 /* GoalEntity+CoreDataClass.swift */,
+				4C8ABC732E40DFED0096F599 /* GoalEntity+CoreDataProperties.swift */,
 				4CB418E82E3778F900277FB0 /* WantDoGet */,
 				4CB418FF2E3778FA00277FB0 /* WantDoGetTests */,
 				4CB419092E3778FA00277FB0 /* WantDoGetUITests */,
@@ -249,6 +258,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4C8ABC742E40DFED0096F599 /* GoalEntity+CoreDataProperties.swift in Sources */,
+				4C8ABC752E40DFED0096F599 /* GoalEntity+CoreDataClass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
